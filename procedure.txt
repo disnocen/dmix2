@@ -1,0 +1,38 @@
+signing for client 1 out of 2
+number: 1, uuid: "4331f6d9-bf5e-4e97-bd02-dc3fe2754766"
+signing for client 2 out of 2
+number: 2, uuid: "4331f6d9-bf5e-4e97-bd02-dc3fe2754766"
+["round0"] party 2 => party 1
+["round0"] party 1 => party 2
+["round1"] party 2 => party 1
+["round1"] party 1 => party 2
+["round2"] party 2 => party 1
+["round2"] party 1 => party 2
+["round3"] party 2 => party 1
+["round3"] party 1 => party 2
+["round4"] party 2 => party 1
+["round4"] party 1 => party 2
+["round5"] party 2 => party 1
+["round5"] party 1 => party 2
+["round6"] party 2 => party 1
+["round6"] party 1 => party 2
+["round7"] party 2 => party 1
+["round7"] party 1 => party 2
+["round8"] party 2 => party 1
+["round8"] party 1 => party 2
+["round9"] party 2 => party 1
+party 1 Output Signature: 
+
+R: Secp256k1Scalar { purpose: "from_bigint", fe: Zeroizing(Some(SK(SecretKey(de62fd2089983e0b43d83a352d8be08db7972b2272d3d1136ecf3af7ec9d5bce)))) }
+s: Secp256k1Scalar { purpose: "from_bigint", fe: Zeroizing(Some(SK(SecretKey(6fce168760a8ed3da2e4c4a20e1bde0cb8a8372cb4f7a1794f3f25a022f24891)))) } 
+
+recid: 0 
+
+["round9"] party 1 => party 2
+party 2 Output Signature: 
+
+R: Secp256k1Scalar { purpose: "from_bigint", fe: Zeroizing(Some(SK(SecretKey(de62fd2089983e0b43d83a352d8be08db7972b2272d3d1136ecf3af7ec9d5bce)))) }
+s: Secp256k1Scalar { purpose: "from_bigint", fe: Zeroizing(Some(SK(SecretKey(6fce168760a8ed3da2e4c4a20e1bde0cb8a8372cb4f7a1794f3f25a022f24891)))) } 
+
+recid: 0 
+
