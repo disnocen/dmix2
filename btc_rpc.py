@@ -13,6 +13,7 @@ def getnewaddress(legacy=True,wallet=WALLET):
     return x
 
 def sendtoaddress(address, amount, wallet=WALLET):
+    # print("Sending {} btc to {}".format(str(amount),address))
     x=exec("bitcoin-cli -rpcwallet="+wallet+" sendtoaddress "+address+" "+str(amount))
     return x
 
@@ -46,6 +47,9 @@ def createwallet(wallet):
     x=exec("bitcoin-cli createwallet "+wallet)
     return x
 
+def importaddress(addr,wallet=WALLET):
+    x=exec("bitcoin-cli -rpcwallet="+wallet+" importaddress "+addr+" '' false")
+    return x
 
 if __name__ == "__main__":
     x=getnewaddress()
@@ -53,8 +57,9 @@ if __name__ == "__main__":
     print("sending 1 btc to {}".format(x))
     txhash=sendtoaddress(x,1)
     print(txhash)
-    # generatetoaddress(10, getnewaddress())
+    generatetoaddress(1, getnewaddress())
+    print(gettransaction(txhash))
     print("decode transaction {}".format(txhash))
     print(decodetransaction(txhash))
-    print("decode transaction {}".format("9bbd2d44b3bdc0b66dbf739ec2fdba1056b175500510feae0471201f79505227"))
-    print(decodetransaction("9bbd2d44b3bdc0b66dbf739ec2fdba1056b175500510feae0471201f79505227"))
+   
+   
