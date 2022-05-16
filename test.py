@@ -67,7 +67,7 @@ b = ''.join(b)
 pub = PublicKey.from_hex(b)
 print(pub.get_address().to_string())
 print(pub.to_hex())
-print(double_sha256(b'ciao'))
+
 
 ########################################
 

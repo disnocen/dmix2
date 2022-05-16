@@ -1,38 +1,87 @@
-signing for client 1 out of 2
-number: 1, uuid: "4331f6d9-bf5e-4e97-bd02-dc3fe2754766"
-signing for client 2 out of 2
-number: 2, uuid: "4331f6d9-bf5e-4e97-bd02-dc3fe2754766"
+signing for client 1 out of 3
+number: 1, uuid: "991f219c-754a-46a1-b89d-3ed2a63cbf30"
+signing for client 2 out of 3
+number: 2, uuid: "991f219c-754a-46a1-b89d-3ed2a63cbf30"
 ["round0"] party 2 => party 1
 ["round0"] party 1 => party 2
-["round1"] party 2 => party 1
+signing for client 3 out of 3
+number: 3, uuid: "991f219c-754a-46a1-b89d-3ed2a63cbf30"
+["round0"] party 3 => party 2
+["round0"] party 3 => party 1
+["round0"] party 1 => party 3
+["round0"] party 2 => party 3
 ["round1"] party 1 => party 2
+["round1"] party 2 => party 1
+["round1"] party 3 => party 2
+["round1"] party 3 => party 1
+["round1"] party 1 => party 3
+["round1"] party 2 => party 3
 ["round2"] party 2 => party 1
 ["round2"] party 1 => party 2
+["round2"] party 3 => party 2
+["round2"] party 3 => party 1
+["round2"] party 1 => party 3
+["round2"] party 2 => party 3
 ["round3"] party 2 => party 1
 ["round3"] party 1 => party 2
-["round4"] party 2 => party 1
+["round3"] party 3 => party 2
+["round3"] party 3 => party 1
+["round3"] party 1 => party 3
 ["round4"] party 1 => party 2
-["round5"] party 2 => party 1
+["round4"] party 2 => party 1
+["round3"] party 2 => party 3
+["round4"] party 3 => party 2
+["round4"] party 3 => party 1
+["round4"] party 1 => party 3
 ["round5"] party 1 => party 2
-["round6"] party 2 => party 1
+["round5"] party 2 => party 1
+["round4"] party 2 => party 3
+["round5"] party 3 => party 1
+["round5"] party 3 => party 2
+["round5"] party 1 => party 3
 ["round6"] party 1 => party 2
+["round6"] party 2 => party 1
+["round5"] party 2 => party 3
+["round6"] party 3 => party 2
+["round6"] party 3 => party 1
+["round6"] party 1 => party 3
 ["round7"] party 2 => party 1
 ["round7"] party 1 => party 2
-["round8"] party 2 => party 1
+["round6"] party 2 => party 3
+["round7"] party 3 => party 1
+["round7"] party 3 => party 2
+["round7"] party 1 => party 3
 ["round8"] party 1 => party 2
+["round8"] party 2 => party 1
+["round7"] party 2 => party 3
+["round8"] party 3 => party 1
+["round8"] party 3 => party 2
+["round8"] party 1 => party 3
+["round9"] party 1 => party 2
 ["round9"] party 2 => party 1
+["round8"] party 2 => party 3
+["round9"] party 3 => party 2
+["round9"] party 3 => party 1
+["round9"] party 1 => party 3
 party 1 Output Signature: 
 
-R: Secp256k1Scalar { purpose: "from_bigint", fe: Zeroizing(Some(SK(SecretKey(de62fd2089983e0b43d83a352d8be08db7972b2272d3d1136ecf3af7ec9d5bce)))) }
-s: Secp256k1Scalar { purpose: "from_bigint", fe: Zeroizing(Some(SK(SecretKey(6fce168760a8ed3da2e4c4a20e1bde0cb8a8372cb4f7a1794f3f25a022f24891)))) } 
-
-recid: 0 
-
-["round9"] party 1 => party 2
 party 2 Output Signature: 
 
-R: Secp256k1Scalar { purpose: "from_bigint", fe: Zeroizing(Some(SK(SecretKey(de62fd2089983e0b43d83a352d8be08db7972b2272d3d1136ecf3af7ec9d5bce)))) }
-s: Secp256k1Scalar { purpose: "from_bigint", fe: Zeroizing(Some(SK(SecretKey(6fce168760a8ed3da2e4c4a20e1bde0cb8a8372cb4f7a1794f3f25a022f24891)))) } 
+R: Secp256k1Scalar { purpose: "from_bigint", fe: Zeroizing(Some(SK(SecretKey(673e1af60b502caa17182261c5f55803f37b02e51bd5e5bf96877c5fd4eb90da)))) }
+s: Secp256k1Scalar { purpose: "from_bigint", fe: Zeroizing(Some(SK(SecretKey(5f0d79d4d7ffc7a5bdac9ca7ecff3e17543a78e4f497d551590a647d490180ab)))) } 
 
-recid: 0 
+recid: 1 
+
+R: Secp256k1Scalar { purpose: "from_bigint", fe: Zeroizing(Some(SK(SecretKey(673e1af60b502caa17182261c5f55803f37b02e51bd5e5bf96877c5fd4eb90da)))) }
+s: Secp256k1Scalar { purpose: "from_bigint", fe: Zeroizing(Some(SK(SecretKey(5f0d79d4d7ffc7a5bdac9ca7ecff3e17543a78e4f497d551590a647d490180ab)))) } 
+
+recid: 1 
+
+["round9"] party 2 => party 3
+party 3 Output Signature: 
+
+R: Secp256k1Scalar { purpose: "from_bigint", fe: Zeroizing(Some(SK(SecretKey(673e1af60b502caa17182261c5f55803f37b02e51bd5e5bf96877c5fd4eb90da)))) }
+s: Secp256k1Scalar { purpose: "from_bigint", fe: Zeroizing(Some(SK(SecretKey(5f0d79d4d7ffc7a5bdac9ca7ecff3e17543a78e4f497d551590a647d490180ab)))) } 
+
+recid: 1 
 

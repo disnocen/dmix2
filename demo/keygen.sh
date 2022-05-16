@@ -26,4 +26,7 @@ do
     # ./gg20_keygen -t 1 -n 3 -i 1 --output local-share1.json
     ./target/release/examples/gg18_keygen_client http://127.0.0.1:8000 keys$i.store &
     sleep 3
-done
+done >log.txt
+
+killall gg18_sm_manager gg18_keygen_client gg18_sign_client 2> /dev/null
+exit 0

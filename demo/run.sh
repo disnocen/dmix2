@@ -42,4 +42,4 @@ done
 #     sleep 3
 # done
 
-# killall gg18_sm_manager 2> /dev/null
+killall gg18_sm_manager 2> /dev/null

@@ -69,7 +69,6 @@ def sendspecific(ins, out, wallet=WALLET):
     command_string_signed += ']\"'
     
     signedtx = eval(exec(command_string_signed).replace('true', "True").replace('false', "False"))
-    print(signedtx)
     if signedtx["complete"]:
         txhash = sendrawtransaction(signedtx["hex"], wallet)
         return txhash
@@ -85,6 +84,18 @@ def generatetoaddress(nblocks, address, wallet=WALLET):
 def sendrawtransaction(txhex, wallet=WALLET):
     x=exec("bitcoin-cli -rpcwallet="+wallet+' sendrawtransaction \"'+txhex+'\"')
     return x
+
+def getscriptfromvout(txid, vout, wallet=WALLET):
+    decodedtx=eval(decodetransaction(txid, wallet))
+    return decodedtx["vout"][vout]["scriptPubKey"]["asm"]
+    
+
+def getvoutfromamount(txid, amount, wallet=WALLET):
+    decodedtx=eval(decodetransaction(txid, wallet))
+    for i in range(len(decodedtx["vout"])):
+        if decodedtx["vout"][i]["value"] == amount:
+            return i
+    return -1
 
 def getbalance(wallet=WALLET):
     x=exec("bitcoin-cli -rpcwallet="+wallet+" getbalance")
@@ -113,30 +124,32 @@ def importaddress(addr,wallet=WALLET):
     return x
 
 if __name__ == "__main__":
-    # x=getnewaddress()
-    # amt = random.randint(1,3)
-    # print("getting a new address",x)
-    # print("sending {} btc to {}".format(amt,x))
-    # txhash=sendtoaddress(x,amt,wallet="aliceWallet")
-    # # print(txhash)
-    # generatetoaddress(2, getnewaddress())
-    # print(json.dumps(gettransaction(txhash),indent=4))
-    # # print("decode transaction {}".format(txhash))
-    # # print(decodetransaction(txhash))
+    x=getnewaddress()
+    amt = random.randint(1,3)
+    print("getting a new address",x)
+    print("sending {} btc to {}".format(amt,x))
+    txhash=sendtoaddress(x,amt,wallet="aliceWallet")
+    # print(txhash)
+    generatetoaddress(2, getnewaddress())
+    print(json.dumps(gettransaction(txhash),indent=4))
+    print("decode transaction {}".format(txhash))
+    print(decodetransaction(txhash))
     # print("this the private key of address {}".format(x))
     # # print(dumprivkey(x))
 
-    txid1 = "7cb48e0e939f5e882c12405e2f2eca705e125325ac99b01d9460c6e1a7614be9"
-    txid2 = "1d1878c13e91ddc34ff4a02ce4cb09fcd8141dcff9a7cfe43fecea70628291d0"
+    # txid1 = "7cb48e0e939f5e882c12405e2f2eca705e125325ac99b01d9460c6e1a7614be9"
+    # txid2 = "1d1878c13e91ddc34ff4a02ce4cb09fcd8141dcff9a7cfe43fecea70628291d0"
 
-    amt = 40.005
-    x=getnewaddress()
+    # amt = 40.005
+    # x=getnewaddress()
 
-    # ins = [{"txid":str(txid),"vout": int(vout)}]
-    ins = [{'txid':str(txid1),'vout': 0},{'txid':str(txid2),'vout': 0}]
-    out = [{x:str(amt)}]
+    # # ins = [{"txid":str(txid),"vout": int(vout)}]
+    # ins = [{'txid':str(txid1),'vout': 0},{'txid':str(txid2),'vout': 0}]
+    # out = [{x:str(amt)}]
     
-    generatetoaddress(2, getnewaddress())
+    # generatetoaddress(2, getnewaddress())
 
-    print("sending {} btc to {}".format(amt,x))
-    print(sendspecific(ins, out, wallet="aliceWallet"))
+    # print("sending {} btc to {}".format(amt,x))
+    # print(sendspecific(ins, out, wallet="aliceWallet"))
+
+    # print("the vout of amount {} in txid {} is {}".format(20.012, "d31c3bc60cc0eef1a5af5f3067a2a4c89d1b686d1b2f62ce842a7d32fb765083", getvoutfromamount("d31c3bc60cc0eef1a5af5f3067a2a4c89d1b686d1b2f62ce842a7d32fb765083", 20.012,wallet="aliceWallet")))

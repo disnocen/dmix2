@@ -5,6 +5,8 @@ n=`echo "$file_as_string" | cut -d "\"" -f 4 `
 t=`echo "$file_as_string" | cut -d "\"" -f 8 `
 
 message="$1"
+killall gg18_sm_manager gg18_keygen_client gg18_sign_client 2> /dev/null
+./target/release/examples/gg18_sm_manager &
 
 for i in $(seq 1 $((t+1)));
 do
@@ -17,10 +19,12 @@ info=$(cat procedure.txt|grep SecretKey|sort|uniq|grep -o "SecretKey(.*)"|sed s/
  
 r=$(echo $info|cut -d" " -f1)
 s=$(echo $info|cut -d" " -f2)
-# killall gg18_sm_manager 2> /dev/null
+killall gg18_sm_manager 2> /dev/null
 
 cat << EOF > signature.json
 {
   "r": "$r",
   "s": "$s"
 } 
+EOF
+exit 0
