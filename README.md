@@ -6,7 +6,9 @@ The paper can be found at <https://www.researchgate.net/profile/Fadi-Barbara/pub
 You can find a video [here](https://fadibarbara.it/owncloud/index.php/s/YfnedvpveDdzMle) on how to play the demo.
 
 ## TL;DR
+
 Just enter the directory of the repository, and do:
+
 ```
 python3 predemo.py
 ```
@@ -14,15 +16,17 @@ python3 predemo.py
 You'll get many error if this is the first time you use it. Read below for the proper way to operate the demonstration:)
 
 ## Requisites
+
 You'll need the Bitcoin Core suite and the Rust library on [multi-party ecdsa by ZenGo](https://github.com/ZenGo-X/multi-party-ecdsa)
 
 ### Bitcoin Core
-Before starting  make sure `bitcoind` is running and you have a `./bitcoin.conf` file similar to those provided by the repository.
+
+Before starting make sure `bitcoind` is running and you have a `./bitcoin.conf` file similar to those provided by the repository.
 
 Start `bitcoind` in regtest as follows:
 
 ```
-bitcoind -regtest -daemon -fallbackfee=0.09
+bitcoind -regtest -daemon -fallbackfee=0.009
 ```
 
 This will remove the need to specify the fees in transactions
@@ -34,7 +38,11 @@ bitcoin-cli createwallet testing
 bitcoin-cli createwallet aliceWallet
 bitcoin-cli createwallet bobWallet
 bitcoin-cli createwallet carolWallet
+```
 
+Otherwise do:
+
+```
 bitcoin-cli loadwallet testing
 bitcoin-cli loadwallet aliceWallet
 bitcoin-cli loadwallet bobWallet
@@ -45,13 +53,15 @@ Then give you, in the `testing` wallet, some coins:
 
 ```
 addr=$(bitcoin-cli -rpcwallet=testing getnewaddress )
-bitcoin-cli -repwallet=testing generatetoaddress 200 $addr
+bitcoin-cli -rpcwallet=testing generatetoaddress 200 $addr
 ```
 
 ### Multiparty ECDSA
+
 This library is used to operate the distributed key generation protocol and the threshold signatures.
 
 Compile the necessary programs by doing:
+
 ```
 cargo +nightly build --examples --release
 ```
@@ -59,22 +69,25 @@ cargo +nightly build --examples --release
 Obviously, you should have a working installation of Rust, the nightly verstion
 
 ### Python
+
 Assuming you have `pip` installed on your machine, do
 
 ```
 pip install -r requisite.txt
 ```
 
-then finally do 
+then finally do
+
 ```
 python3 predemo.py
 ```
 
 Then just press "Enter" to advance into the demo.
 
-***
+---
 
 For any problem contact me at:
+
 - email: me [atsign] fadibarbara dot it
 - telegram: @fadiabarbara
 
