@@ -2,27 +2,33 @@ import subprocess
 import json
 import random
 
-WALLET="testing"
+WALLET = "testing"
+
 
 def exec(script):
     return subprocess.check_output(script, shell=True).decode('utf-8').strip()
 
-def getnewaddress(legacy=True,wallet=WALLET):
+
+def getnewaddress(legacy=True, wallet=WALLET):
     if legacy:
-        x=exec("bitcoin-cli -rpcwallet="+wallet+" getnewaddress '' legacy")
+        x = exec("bitcoin-cli -rpcwallet="+wallet+" getnewaddress '' legacy")
     else:
-        x=exec("bitcoin-cli -rpcwallet="+wallet+" getnewaddress")
+        x = exec("bitcoin-cli -rpcwallet="+wallet+" getnewaddress")
     return x
 
-def dumprivkey(addr,wallet=WALLET):
-    x=exec("bitcoin-cli -rpcwallet="+wallet+" dumpprivkey "+addr)
+
+def dumprivkey(addr, wallet=WALLET):
+    x = exec("bitcoin-cli -rpcwallet="+wallet+" dumpprivkey "+addr)
     return x
+
 
 def sendtoaddress(address, amount, wallet=WALLET):
-    
+
     # print("Sending {} btc to {}".format(str(amount),address))
-    x=exec("bitcoin-cli -rpcwallet="+wallet+" sendtoaddress "+address+" "+str(amount))
+    x = exec("bitcoin-cli -rpcwallet="+wallet +
+             " sendtoaddress "+address+" "+str(amount))
     return x
+
 
 def sendspecific(ins, out, wallet=WALLET):
     '''
@@ -33,29 +39,33 @@ def sendspecific(ins, out, wallet=WALLET):
     assumes all inputs are from the same wallet
     '''
 
-    command_string = 'bitcoin-cli -rpcwallet='+wallet+' createrawtransaction \"['
+    command_string = 'bitcoin-cli -rpcwallet=' + \
+        wallet+' createrawtransaction \"['
 
     for i in range(len(ins)):
         if i != len(ins)-1:
-            command_string += '{\\"txid\\":\\"'+ins[i]["txid"]+'\\",\\"vout\\":'+str(ins[i]["vout"])+'},'
+            command_string += '{\\"txid\\":\\"' + \
+                ins[i]["txid"]+'\\",\\"vout\\":'+str(ins[i]["vout"])+'},'
         else:
-            command_string += '{\\"txid\\":\\"'+ins[i]["txid"]+'\\",\\"vout\\":'+str(ins[i]["vout"])+'}'
+            command_string += '{\\"txid\\":\\"' + \
+                ins[i]["txid"]+'\\",\\"vout\\":'+str(ins[i]["vout"])+'}'
     command_string += ']\" \"['
 
     for i in range(len(out)):
         if i != len(out)-1:
-            for k,v in out[i].items():
+            for k, v in out[i].items():
                 command_string += '{\\"'+k+'\\":'+str(v)+"},"
         else:
-            for k,v in out[i].items():
+            for k, v in out[i].items():
                 command_string += '{\\"'+k+'\\":'+str(v)+"}"
     command_string += ']\"'
     txrawhex = exec(command_string)
-   
-    command_string_signed = 'bitcoin-cli -rpcwallet='+wallet+' signrawtransactionwithkey \"'+txrawhex+'\" \"['
+
+    command_string_signed = 'bitcoin-cli -rpcwallet='+wallet + \
+        ' signrawtransactionwithkey \"'+txrawhex+'\" \"['
 
     for i in range(len(ins)):
-        txid_details = gettransaction(ins[i]['txid'])["details"]
+        txid_details = gettransaction(ins[i]['txid'], wallet)["details"]
         vout = ins[i]['vout']
         privkey = ""
         for j in range(len(txid_details)):
@@ -63,12 +73,13 @@ def sendspecific(ins, out, wallet=WALLET):
                 privkey = dumprivkey(txid_details[j]['address'], wallet)
                 break
         if i != len(ins)-1:
-            command_string_signed += '\\"'+ privkey+ '\\",'
+            command_string_signed += '\\"' + privkey + '\\",'
         else:
-            command_string_signed += '\\"'+ privkey +'\\"'
+            command_string_signed += '\\"' + privkey + '\\"'
     command_string_signed += ']\"'
-    
-    signedtx = eval(exec(command_string_signed).replace('true', "True").replace('false', "False"))
+
+    signedtx = eval(exec(command_string_signed).replace(
+        'true', "True").replace('false', "False"))
     if signedtx["complete"]:
         txhash = sendrawtransaction(signedtx["hex"], wallet)
         return txhash
@@ -77,61 +88,74 @@ def sendspecific(ins, out, wallet=WALLET):
         return signedtx
     # return signedtx
 
+
 def generatetoaddress(nblocks, address, wallet=WALLET):
-    x=exec("bitcoin-cli -rpcwallet="+wallet+" generatetoaddress "+str(nblocks)+" "+address)
+    x = exec("bitcoin-cli -rpcwallet="+wallet +
+             " generatetoaddress "+str(nblocks)+" "+address)
     return x
+
 
 def sendrawtransaction(txhex, wallet=WALLET):
-    x=exec("bitcoin-cli -rpcwallet="+wallet+' sendrawtransaction \"'+txhex+'\"')
+    x = exec("bitcoin-cli -rpcwallet="+wallet +
+             ' sendrawtransaction \"'+txhex+'\"')
     return x
 
+
 def getscriptfromvout(txid, vout, wallet=WALLET):
-    decodedtx=eval(decodetransaction(txid, wallet))
+    decodedtx = eval(decodetransaction(txid, wallet))
     return decodedtx["vout"][vout]["scriptPubKey"]["asm"]
-    
+
 
 def getvoutfromamount(txid, amount, wallet=WALLET):
-    decodedtx=eval(decodetransaction(txid, wallet))
+    decodedtx = eval(decodetransaction(txid, wallet))
     for i in range(len(decodedtx["vout"])):
         if decodedtx["vout"][i]["value"] == amount:
             return i
     return -1
 
+
 def getbalance(wallet=WALLET):
-    x=exec("bitcoin-cli -rpcwallet="+wallet+" getbalance")
+    x = exec("bitcoin-cli -rpcwallet="+wallet+" getbalance")
     return x
+
 
 def gettransaction(txid, wallet=WALLET):
-    x=exec("bitcoin-cli -rpcwallet="+wallet+" gettransaction "+txid)
+    x = exec("bitcoin-cli -rpcwallet="+wallet+" gettransaction "+txid)
     # print(x)
-    return eval(x.replace("true","True").replace("false","False"))
+    return eval(x.replace("true", "True").replace("false", "False"))
+
 
 def gettransactionhex(txid, wallet=WALLET):
-    x=gettransaction(txid, wallet)
+    x = gettransaction(txid, wallet)
     return x["hex"]
 
+
 def decodetransaction(txid, wallet=WALLET):
-    txhex=gettransactionhex(txid, wallet)
-    x=exec("bitcoin-cli -rpcwallet="+wallet+" decoderawtransaction "+txhex)
+    txhex = gettransactionhex(txid, wallet)
+    x = exec("bitcoin-cli -rpcwallet="+wallet+" decoderawtransaction "+txhex)
     return x
+
 
 def createwallet(wallet):
-    x=exec("bitcoin-cli createwallet "+wallet)
+    x = exec("bitcoin-cli createwallet "+wallet)
     return x
 
-def importaddress(addr,wallet=WALLET):
-    x=exec("bitcoin-cli -rpcwallet="+wallet+" importaddress "+addr+" '' false")
+
+def importaddress(addr, wallet=WALLET):
+    x = exec("bitcoin-cli -rpcwallet="+wallet +
+             " importaddress "+addr+" '' false")
     return x
+
 
 if __name__ == "__main__":
-    x=getnewaddress()
-    amt = random.randint(1,3)
-    print("getting a new address",x)
-    print("sending {} btc to {}".format(amt,x))
-    txhash=sendtoaddress(x,amt,wallet="aliceWallet")
+    x = getnewaddress()
+    amt = random.randint(1, 3)
+    print("getting a new address", x)
+    print("sending {} btc to {}".format(amt, x))
+    txhash = sendtoaddress(x, amt, wallet="aliceWallet")
     # print(txhash)
     generatetoaddress(2, getnewaddress())
-    print(json.dumps(gettransaction(txhash),indent=4))
+    print(json.dumps(gettransaction(txhash), indent=4))
     print("decode transaction {}".format(txhash))
     print(decodetransaction(txhash))
     # print("this the private key of address {}".format(x))
@@ -146,7 +170,7 @@ if __name__ == "__main__":
     # # ins = [{"txid":str(txid),"vout": int(vout)}]
     # ins = [{'txid':str(txid1),'vout': 0},{'txid':str(txid2),'vout': 0}]
     # out = [{x:str(amt)}]
-    
+
     # generatetoaddress(2, getnewaddress())
 
     # print("sending {} btc to {}".format(amt,x))
