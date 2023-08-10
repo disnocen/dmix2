@@ -1,5 +1,7 @@
 # README
 
+**THIS README IS DEPRECATED VOR THIS RUST BASED BRANCH. NEED TO WRITE A NEW ONE.**
+
 This repository contains a demonstration of how DMix works.
 The paper can be found at <https://www.researchgate.net/profile/Fadi-Barbara/publication/347266094_DMix_decentralized_mixer_for_unlinkability/links/60a3ec17a6fdcc74c1761384/DMix-decentralized-mixer-for-unlinkability.pdf>
 
