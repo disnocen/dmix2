@@ -1,14 +1,14 @@
 key gen for client 1 out of 3
-number: 1, uuid: "e8b841aa-7d4c-4401-bce6-f4874088d8ec"
+number: 1, uuid: "50d9f416-f58e-4249-a8db-986481d14ebb"
 key gen for client 2 out of 3
-number: 2, uuid: "e8b841aa-7d4c-4401-bce6-f4874088d8ec"
+number: 2, uuid: "50d9f416-f58e-4249-a8db-986481d14ebb"
 ["round1"] party 2 => party 1
 ["round1"] party 1 => party 2
 key gen for client 3 out of 3
-number: 3, uuid: "e8b841aa-7d4c-4401-bce6-f4874088d8ec"
-["round1"] party 3 => party 2
+number: 3, uuid: "50d9f416-f58e-4249-a8db-986481d14ebb"
 ["round1"] party 3 => party 1
 ["round1"] party 1 => party 3
+["round1"] party 3 => party 2
 ["round2"] party 1 => party 2
 ["round2"] party 2 => party 1
 ["round1"] party 2 => party 3
@@ -18,19 +18,19 @@ number: 3, uuid: "e8b841aa-7d4c-4401-bce6-f4874088d8ec"
 ["round2"] party 2 => party 3
 ["round3"] party 1 => party 2
 ["round3"] party 2 => party 1
-["round3"] party 3 => party 2
 ["round3"] party 1 => party 3
 ["round3"] party 3 => party 1
-["round4"] party 1 => party 2
+["round3"] party 3 => party 2
 ["round3"] party 2 => party 3
+["round4"] party 1 => party 2
 ["round4"] party 2 => party 1
-["round4"] party 3 => party 2
 ["round4"] party 1 => party 3
 ["round4"] party 3 => party 1
+["round4"] party 3 => party 2
 ["round4"] party 2 => party 3
 ["round5"] party 1 => party 2
 ["round5"] party 2 => party 1
 ["round5"] party 1 => party 3
-["round5"] party 3 => party 2
 ["round5"] party 3 => party 1
+["round5"] party 3 => party 2
 ["round5"] party 2 => party 3
